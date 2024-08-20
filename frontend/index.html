@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Info</title>
+</head>
+
+<body>
+    <h1>Find Where Your Movie is Streaming</h1>
+
+    <input type="text" id="filmNameInput" placeholder="Enter movie name">
+    <select id="countrySelect">
+        <option value="uk" selected="true">United Kingdom</option>
+        <option value="us">United States</option>
+        <option value="ar">Argentina</option>
+        <option value="at">Austria</option>
+        <option value="be">Belgium</option>
+        <option value="br">Brazil</option>
+        <option value="ca">Canada</option>
+        <option value="de">Germany</option>
+        <option value="es">Spain</option>
+        <option value="fr">France</option>
+        <option value="ie">Ireland</option>
+        <option value="id">Indonesia</option>
+        <option value="it">Italy</option>
+        <option value="is">Iceland</option>
+        <option value="kr">South Korea</option>
+        <option value="my">Malaysia</option>
+        <option value="mx">Mexico</option>
+        <option value="no">Norway</option>
+        <option value="nl">Netherlands</option>
+        <option value="pt">Portugal</option>
+        <option value="se">Sweden</option>
+        <option value="sg">Singapore</option>
+    </select>
+    <button id="submit">Search</button>
+
+    <h2>Streaming Platforms:</h2>
+    <ul id="results"></ul>
+
+    <script>
+        async function getStreamingInfo(filmName, countryCode) {
+            const response = await fetch('http://127.0.0.1:5000/get-streaming-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ film_name: filmName, country_code: countryCode })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const parsedData = parseData(data);
+                displayResults(parsedData);
+            } else {
+                console.error('Error fetching streaming information');
+            }
+        }
+
+        function parseData(data){
+            const parsedData = []
+
+            if (data != null){
+                data.forEach(movie =>{
+                    const movieData = {
+                        name: movie.name,
+                        locations: movie.locations.map(location => ({
+                            display_name: location.display_name,
+                            icon: location.icon,
+                            url: location.url
+                        }))
+                        // , other interesting fields
+                    };
+                    parsedData.push(movieData);
+                });
+            };
+
+            console.log(parsedData);
+            return parsedData;   
+        }
+
+        function displayResults(parsedData) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';  // Clear previous results
+
+            parsedData.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.classList.add('movie');
+
+                const movieTitle = document.createElement('h2');
+                movieTitle.textContent = movie.name;
+                movieDiv.appendChild(movieTitle);
+
+                const locationsList = document.createElement('ul');
+                movie.locations.forEach(location => {
+                    const locationItem = document.createElement('li');
+
+                    const locationLink = document.createElement('a');
+                    locationLink.href = location.url;
+                    locationLink.textContent = location.display_name;
+                    locationLink.target = '_blank';
+
+                    const locationIcon = document.createElement('img');
+                    locationIcon.src = location.icon;
+                    locationIcon.alt = location.display_name;
+                    locationIcon.style.width = '24px';  // Optional: Set icon size
+                    locationIcon.style.marginRight = '8px';  // Optional: Add some spacing
+
+                    locationItem.appendChild(locationIcon);
+                    locationItem.appendChild(locationLink);
+                    locationsList.appendChild(locationItem);
+                });
+
+                movieDiv.appendChild(locationsList);
+                resultsDiv.appendChild(movieDiv);
+            });
+        }
+
+        document.getElementById('submit').addEventListener('click', () => {
+            const filmName = document.getElementById('filmNameInput').value;
+            const countryCode = document.getElementById('countrySelect').value;
+            getStreamingInfo(filmName, countryCode);
+        });
+    </script>
+</body>
+</html>
