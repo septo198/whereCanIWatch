@@ -21,27 +21,27 @@ def get_streaming_info():
     url = "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup"
     querystring = {"term": "", "country": ""}
     querystring = {"term": film_name, "country": country_code}
-    print(querystring)
+    # print(querystring)
     headers = {
         "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
         "x-rapidapi-key": xrapidapikey
     }
 
     response = requests.get(url, headers=headers, params=querystring)
-    print(response.text)
+    # print(response.text)
 
     parsedData = json.loads(response.text)
     results = parsedData.get('results', [])
     for result in results:
         movie_name = result.get('name')
-        print(f"Movie: {movie_name}")
+        # print(f"Movie: {movie_name}")
         
         locations = result.get('locations', [])
         for location in locations:
             display_name = location.get('display_name')
             url = location.get('url')
-            print(f" - Available on: {display_name}")
-            print(f"   URL: {url}")
+            # print(f" - Available on: {display_name}")
+            # print(f"   URL: {url}")
 
     return results, 200
 

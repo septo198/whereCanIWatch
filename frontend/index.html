@@ -4,72 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="styles\styleTree.css">
     <!--<link rel="stylesheet" href="styles\style.css">-->
     <!--<link rel="stylesheet" href="styles\styleWG.css">-->
-    <link rel="stylesheet" href="styles\styleTree.css">
+    
     <title>wherecaniwatch</title>
 </head>
 
 <body>
-    <div class="background"></div>
+    <div class="container">
 
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="firefly"></div>
-    <div class="content">
-        <h1 class="h1">Where can I watch it?</h1>
+        <div class="background"></div>
+        <div id="fireflies">
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+            <div class="firefly"></div>
+        </div>
+        
+        <div class="content">
 
-        <input type="text" id="filmNameInput" placeholder="Enter movie name">
-        <select id="countrySelect">
-            <option value="uk" selected="true">United Kingdom</option>
-            <option value="us">United States</option>
-            <option value="ar">Argentina</option>
-            <option value="at">Austria</option>
-            <option value="be">Belgium</option>
-            <option value="br">Brazil</option>
-            <option value="ca">Canada</option>
-            <option value="de">Germany</option>
-            <option value="es">Spain</option>
-            <option value="fr">France</option>
-            <option value="ie">Ireland</option>
-            <option value="id">Indonesia</option>
-            <option value="it">Italy</option>
-            <option value="is">Iceland</option>
-            <option value="kr">South Korea</option>
-            <option value="my">Malaysia</option>
-            <option value="mx">Mexico</option>
-            <option value="no">Norway</option>
-            <option value="nl">Netherlands</option>
-            <option value="pt">Portugal</option>
-            <option value="se">Sweden</option>
-            <option value="sg">Singapore</option>
-        </select>
-        <button id="submit">Search</button>
+            <div class="block">
+                <h1 class="h1" style="font-size: 9vw">Where can I watch it?</h1>
+            </div>
 
-        <h2>Streaming Platforms:</h2>
-        <ul id="results"></ul>
+            <div class="block field is-grouped control" style="margin: 10px; display: flex; flex-wrap: flex; align-items: stretch; justify-content: flex-start; gap: 10px;">
+                <input type="text" id="filmNameInput" placeholder="Enter movie name" class="input is-normal">
 
+                <div class="dropdown" id="countrySelect">
+                    <div class="dropdown-trigger">
+                      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <span id="selectedCountry">United Kingdom</span>
+                        <span class="icon is-small">
+                          <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item" data-value="uk">United Kingdom</a>
+                            <a href="#" class="dropdown-item" data-value="us">United States</a>
+                            <a href="#" class="dropdown-item" data-value="ar">Argentina</a>
+                            <a href="#" class="dropdown-item" data-value="at">Austria</a>
+                            <a href="#" class="dropdown-item" data-value="be">Belgium</a>
+                            <a href="#" class="dropdown-item" data-value="br">Brazil</a>
+                            <a href="#" class="dropdown-item" data-value="ca">Canada</a>
+                            <a href="#" class="dropdown-item" data-value="de">Germany</a>
+                            <a href="#" class="dropdown-item" data-value="es">Spain</a>
+                            <a href="#" class="dropdown-item" data-value="fr">France</a>
+                            <a href="#" class="dropdown-item" data-value="ie">Ireland</a>
+                            <a href="#" class="dropdown-item" data-value="id">Indonesia</a>
+                            <a href="#" class="dropdown-item" data-value="it">Italy</a>
+                            <a href="#" class="dropdown-item" data-value="is">Iceland</a>
+                            <a href="#" class="dropdown-item" data-value="kr">South Korea</a>
+                            <a href="#" class="dropdown-item" data-value="my">Malaysia</a>
+                            <a href="#" class="dropdown-item" data-value="mx">Mexico</a>
+                            <a href="#" class="dropdown-item" data-value="no">Norway</a>
+                            <a href="#" class="dropdown-item" data-value="nl">Netherlands</a>
+                            <a href="#" class="dropdown-item" data-value="pt">Portugal</a>
+                            <a href="#" class="dropdown-item" data-value="se">Sweden</a>
+                            <a href="#" class="dropdown-item" data-value="sg">Singapore</a>
+                        </div>
+                    </div>
+                </div>
+                  
+                <button id="submit" class="button is-white">Search</button>
+            </div>
+
+            <div class="block">
+                <!--<h2>Streaming Platforms:</h2>-->
+                <ul id="results"></ul>
+            </div>
+    
+        </div>
     </div>
 
     <script>
@@ -116,16 +147,35 @@
             resultsDiv.innerHTML = '';  // Clear previous results
 
             parsedData.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.classList.add('movie');
+                // Create the main card container
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card', 'mb-5');  // mb-5 adds margin below the card
 
-                const movieTitle = document.createElement('h2');
+                // Create the card content
+                const cardContentDiv = document.createElement('div');
+                cardContentDiv.classList.add('card-content');
+
+                // Add the movie title
+                const mediaDiv = document.createElement('div');
+                mediaDiv.classList.add('media');
+
+                const mediaContentDiv = document.createElement('div');
+                mediaContentDiv.classList.add('media-content');
+
+                const movieTitle = document.createElement('p');
+                movieTitle.classList.add('title', 'is-4');
                 movieTitle.textContent = movie.name;
-                movieDiv.appendChild(movieTitle);
 
-                const locationsList = document.createElement('ul');
+                mediaContentDiv.appendChild(movieTitle);
+                mediaDiv.appendChild(mediaContentDiv);
+                cardContentDiv.appendChild(mediaDiv);
+
+                // Add locations as a list
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('content');
+
                 movie.locations.forEach(location => {
-                    const locationItem = document.createElement('li');
+                    const locationItem = document.createElement('p');
 
                     const locationLink = document.createElement('a');
                     locationLink.href = location.url;
@@ -135,24 +185,64 @@
                     const locationIcon = document.createElement('img');
                     locationIcon.src = location.icon;
                     locationIcon.alt = location.display_name;
-                    locationIcon.style.width = '24px';  // Optional: Set icon size
-                    locationIcon.style.marginRight = '8px';  // Optional: Add some spacing
+                    locationIcon.style.width = '24px';  // Set icon size
+                    locationIcon.style.marginRight = '8px';  // Add some spacing
 
                     locationItem.appendChild(locationIcon);
                     locationItem.appendChild(locationLink);
-                    locationsList.appendChild(locationItem);
+                    contentDiv.appendChild(locationItem);
                 });
 
-                movieDiv.appendChild(locationsList);
-                resultsDiv.appendChild(movieDiv);
+                cardContentDiv.appendChild(contentDiv);
+                cardDiv.appendChild(cardContentDiv);
+
+                // Append the card to the results div
+                resultsDiv.appendChild(cardDiv);
             });
         }
+
 
         document.getElementById('submit').addEventListener('click', () => {
             const filmName = document.getElementById('filmNameInput').value;
             const countryCode = document.getElementById('countrySelect').value;
             getStreamingInfo(filmName, countryCode);
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.getElementById('countrySelect');
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        const items = dropdown.querySelectorAll('.dropdown-item');
+        const selectedCountry = document.getElementById('selectedCountry');
+
+        // Toggle dropdown
+        trigger.addEventListener('click', () => {
+            dropdown.classList.toggle('is-active');
+        });
+
+        // Handle dropdown item selection
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const value = item.getAttribute('data-value');
+            const text = item.textContent;
+
+            // Update the displayed text
+            selectedCountry.textContent = text;
+
+            // Close the dropdown
+            dropdown.classList.remove('is-active');
+            });
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            const isClickInside = dropdown.contains(event.target);
+            if (!isClickInside) {
+            dropdown.classList.remove('is-active');
+            }
+        });
+        });
+
     </script>
 </body>
 </html>
