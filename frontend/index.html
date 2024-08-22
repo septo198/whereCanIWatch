@@ -4,41 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streaming Info</title>
+    <!--<link rel="stylesheet" href="styles\style.css">-->
+    <!--<link rel="stylesheet" href="styles\styleWG.css">-->
+    <link rel="stylesheet" href="styles\styleTree.css">
+    <title>wherecaniwatch</title>
 </head>
 
 <body>
-    <h1>Find Where Your Movie is Streaming</h1>
+    <div class="background"></div>
 
-    <input type="text" id="filmNameInput" placeholder="Enter movie name">
-    <select id="countrySelect">
-        <option value="uk" selected="true">United Kingdom</option>
-        <option value="us">United States</option>
-        <option value="ar">Argentina</option>
-        <option value="at">Austria</option>
-        <option value="be">Belgium</option>
-        <option value="br">Brazil</option>
-        <option value="ca">Canada</option>
-        <option value="de">Germany</option>
-        <option value="es">Spain</option>
-        <option value="fr">France</option>
-        <option value="ie">Ireland</option>
-        <option value="id">Indonesia</option>
-        <option value="it">Italy</option>
-        <option value="is">Iceland</option>
-        <option value="kr">South Korea</option>
-        <option value="my">Malaysia</option>
-        <option value="mx">Mexico</option>
-        <option value="no">Norway</option>
-        <option value="nl">Netherlands</option>
-        <option value="pt">Portugal</option>
-        <option value="se">Sweden</option>
-        <option value="sg">Singapore</option>
-    </select>
-    <button id="submit">Search</button>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="content">
+        <h1 class="h1">Where can I watch it?</h1>
 
-    <h2>Streaming Platforms:</h2>
-    <ul id="results"></ul>
+        <input type="text" id="filmNameInput" placeholder="Enter movie name">
+        <select id="countrySelect">
+            <option value="uk" selected="true">United Kingdom</option>
+            <option value="us">United States</option>
+            <option value="ar">Argentina</option>
+            <option value="at">Austria</option>
+            <option value="be">Belgium</option>
+            <option value="br">Brazil</option>
+            <option value="ca">Canada</option>
+            <option value="de">Germany</option>
+            <option value="es">Spain</option>
+            <option value="fr">France</option>
+            <option value="ie">Ireland</option>
+            <option value="id">Indonesia</option>
+            <option value="it">Italy</option>
+            <option value="is">Iceland</option>
+            <option value="kr">South Korea</option>
+            <option value="my">Malaysia</option>
+            <option value="mx">Mexico</option>
+            <option value="no">Norway</option>
+            <option value="nl">Netherlands</option>
+            <option value="pt">Portugal</option>
+            <option value="se">Sweden</option>
+            <option value="sg">Singapore</option>
+        </select>
+        <button id="submit">Search</button>
+
+        <h2>Streaming Platforms:</h2>
+        <ul id="results"></ul>
+
+    </div>
 
     <script>
         async function getStreamingInfo(filmName, countryCode) {
@@ -76,8 +108,6 @@
                     parsedData.push(movieData);
                 });
             };
-
-            console.log(parsedData);
             return parsedData;   
         }
 
