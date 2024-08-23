@@ -97,9 +97,19 @@
 
             <div class="block">
                 <!--<h2>Streaming Platforms:</h2>-->
-                <ul id="results"></ul>
+                <!--<ul id="results"></ul>-->
+                <div class="card-container" id="results"></div>
             </div>
     
+            <div class="expanded-card-background" id="expandedCardBackground">
+                <div class="expanded-card" id="expandedCard">
+                    <img id="expandedImage" src="" alt="Movie Image">
+                    <div class="expanded-card-content">
+                        <h2 id="expandedTitle" class="expanded-card-title" style="color: black"></h2>
+                        <div id="expandedContent"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -133,7 +143,8 @@
                             display_name: location.display_name,
                             icon: location.icon,
                             url: location.url
-                        }))
+                        })),
+                        image: movie.picture
                         // , other interesting fields
                     };
                     parsedData.push(movieData);
@@ -147,60 +158,62 @@
             resultsDiv.innerHTML = '';  // Clear previous results
 
             parsedData.forEach(movie => {
-                // Create the main card container
                 const cardDiv = document.createElement('div');
-                cardDiv.classList.add('card', 'mb-5');  // mb-5 adds margin below the card
+                cardDiv.classList.add('card');
 
-                // Create the card content
-                const cardContentDiv = document.createElement('div');
-                cardContentDiv.classList.add('card-content');
+                const img = document.createElement('img');
+                img.src = movie.image;
+                img.alt = movie.name;
 
-                // Add the movie title
-                const mediaDiv = document.createElement('div');
-                mediaDiv.classList.add('media');
+                const title = document.createElement('div');
+                title.classList.add('card-title');
+                title.textContent = movie.name;
 
-                const mediaContentDiv = document.createElement('div');
-                mediaContentDiv.classList.add('media-content');
+                cardDiv.appendChild(img);
+                cardDiv.appendChild(title);
 
-                const movieTitle = document.createElement('p');
-                movieTitle.classList.add('title', 'is-4');
-                movieTitle.textContent = movie.name;
+                cardDiv.addEventListener('click', () => expandCard(movie));
 
-                mediaContentDiv.appendChild(movieTitle);
-                mediaDiv.appendChild(mediaContentDiv);
-                cardContentDiv.appendChild(mediaDiv);
-
-                // Add locations as a list
-                const contentDiv = document.createElement('div');
-                contentDiv.classList.add('content');
-
-                movie.locations.forEach(location => {
-                    const locationItem = document.createElement('p');
-
-                    const locationLink = document.createElement('a');
-                    locationLink.href = location.url;
-                    locationLink.textContent = location.display_name;
-                    locationLink.target = '_blank';
-
-                    const locationIcon = document.createElement('img');
-                    locationIcon.src = location.icon;
-                    locationIcon.alt = location.display_name;
-                    locationIcon.style.width = '24px';  // Set icon size
-                    locationIcon.style.marginRight = '8px';  // Add some spacing
-
-                    locationItem.appendChild(locationIcon);
-                    locationItem.appendChild(locationLink);
-                    contentDiv.appendChild(locationItem);
-                });
-
-                cardContentDiv.appendChild(contentDiv);
-                cardDiv.appendChild(cardContentDiv);
-
-                // Append the card to the results div
                 resultsDiv.appendChild(cardDiv);
             });
         }
+        
+        function expandCard(movie) {
+            const expandedCardBackground = document.getElementById('expandedCardBackground');
+            const expandedCard = document.getElementById('expandedCard');
+            const expandedImage = document.getElementById('expandedImage');
+            const expandedTitle = document.getElementById('expandedTitle');
+            const expandedContent = document.getElementById('expandedContent');
 
+            expandedImage.src = movie.image;
+            expandedTitle.textContent = movie.name;
+            expandedContent.innerHTML = '';  // Clear previous content
+
+            movie.locations.forEach(location => {
+                const locationItem = document.createElement('a');
+                locationItem.href = location.url;
+                locationItem.textContent = `Watch on ${location.display_name}`;
+                locationItem.target = '_blank';
+
+                expandedContent.appendChild(locationItem);
+            });
+
+            expandedCardBackground.style.display = 'flex'; // Show the expanded card
+        }
+
+        // Close the expanded card when clicking outside of it
+        document.getElementById('expandedCardBackground').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+
+        // Close the expanded card when clicking outside of it
+        document.getElementById('expandedCard').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
 
         document.getElementById('submit').addEventListener('click', () => {
             const filmName = document.getElementById('filmNameInput').value;

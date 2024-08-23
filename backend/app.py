@@ -32,6 +32,7 @@ def get_streaming_info():
 
     parsedData = json.loads(response.text)
     results = parsedData.get('results', [])
+    print(results)
     for result in results:
         movie_name = result.get('name')
         # print(f"Movie: {movie_name}")
