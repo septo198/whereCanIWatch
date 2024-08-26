@@ -96,8 +96,6 @@
             </div>
 
             <div class="block">
-                <!--<h2>Streaming Platforms:</h2>-->
-                <!--<ul id="results"></ul>-->
                 <div class="card-container" id="results"></div>
             </div>
     
@@ -114,6 +112,15 @@
     </div>
 
     <script>
+        function loadImageWithFallback(imageElement, imageUrl) {
+            imageElement.src = imageUrl;
+
+            imageElement.onerror = function() {
+                //console.error('Image failed to load, using fallback.');
+                imageElement.src = 'images//imagenotfound.jpg'; 
+            };
+        }
+
         async function getStreamingInfo(filmName, countryCode) {
             const response = await fetch('http://127.0.0.1:5000/get-streaming-info', {
                 method: 'POST',
@@ -162,7 +169,8 @@
                 cardDiv.classList.add('card');
 
                 const img = document.createElement('img');
-                img.src = movie.image;
+                loadImageWithFallback(img, movie.image);
+                //img.src = movie.image;
                 img.alt = movie.name;
 
                 const title = document.createElement('div');
@@ -185,7 +193,8 @@
             const expandedTitle = document.getElementById('expandedTitle');
             const expandedContent = document.getElementById('expandedContent');
 
-            expandedImage.src = movie.image;
+            loadImageWithFallback(expandedImage, movie.image);
+            //expandedImage.src = movie.image;
             expandedTitle.textContent = movie.name;
             expandedContent.innerHTML = '';  // Clear previous content
 
@@ -200,6 +209,8 @@
 
             expandedCardBackground.style.display = 'flex'; // Show the expanded card
         }
+
+        
 
         // Close the expanded card when clicking outside of it
         document.getElementById('expandedCardBackground').addEventListener('click', function(e) {
