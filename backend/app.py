@@ -4,7 +4,7 @@ import requests
 import json 
 
 app = Flask(__name__)
-CORS(app)  # This will enable CORS for all routes
+CORS(app)  
 
 @app.route('/get-streaming-info', methods=['POST'])
 def get_streaming_info():
@@ -14,7 +14,7 @@ def get_streaming_info():
         return jsonify({"error": "Film name is required"}), 400
     
     # Load API key from the config.json file
-    with open('backend\config.json', 'r') as file:
+    with open('config.json', 'r') as file:
         config = json.load(file)
     xrapidapikey = config['x-rapidapi-key']
 
@@ -32,15 +32,15 @@ def get_streaming_info():
 
     parsedData = json.loads(response.text)
     results = parsedData.get('results', [])
-    print(results)
-    for result in results:
-        movie_name = result.get('name')
+    # print(results)
+    # for result in results:
+        # movie_name = result.get('name')
         # print(f"Movie: {movie_name}")
         
-        locations = result.get('locations', [])
-        for location in locations:
-            display_name = location.get('display_name')
-            url = location.get('url')
+        # locations = result.get('locations', [])
+        # for location in locations:
+            # display_name = location.get('display_name')
+            # url = location.get('url')
             # print(f" - Available on: {display_name}")
             # print(f"   URL: {url}")
 

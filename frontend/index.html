@@ -122,7 +122,8 @@
         }
 
         async function getStreamingInfo(filmName, countryCode) {
-            const response = await fetch('http://127.0.0.1:5000/api/get-streaming-info', {
+            const response = await fetch('/api/get-streaming-info', {
+            //const response = await fetch('http://127.0.0.1:5000/api/get-streaming-info', { //for local use //TODO: add nginx in local env
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
