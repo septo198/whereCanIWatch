@@ -50,7 +50,7 @@
         <div class="content">
 
             <div class="block">
-                <h1 class="h1" style="font-size: 7vw">Where can I watch it?</h1>
+                <h1 class="h1" style="font-size: 7vw" id="typewriter"></h1>
             </div>
 
             <div class="block field is-grouped control" style="margin: 10px; display: flex; flex-wrap: flex; align-items: stretch; justify-content: flex-start; gap: 10px;">
@@ -282,6 +282,27 @@
             }
         });
         });
+
+        const text = "Where can I watch it?";
+        const speed = 60; 
+
+        function typeWriter(text, i) {
+            if (i < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, speed);
+            } else {
+                // Stop the caret blink after typing is complete
+                document.getElementById("typewriter").style.borderRight = "none";
+            }
+        }
+
+        window.onload = function() {
+            typeWriter(text, 0);
+        };
+
 
     </script>
 </body>
