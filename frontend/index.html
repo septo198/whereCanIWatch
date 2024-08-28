@@ -123,8 +123,8 @@
         }
 
         async function getStreamingInfo(filmName, countryCode) {
-            const response = await fetch('/api/get-streaming-info', {
-            //const response = await fetch('http://127.0.0.1:5000/api/get-streaming-info', { //for local use //TODO: add nginx in local env
+            //const response = await fetch('/api/get-streaming-info', {
+            const response = await fetch('http://127.0.0.1:5000/api/get-streaming-info', { //for local use //TODO: add nginx in local env
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -157,6 +157,7 @@
                         // , other interesting fields
                     };
                     parsedData.push(movieData);
+                    //console.log(movieData);
                 });
             };
             return parsedData;   
@@ -201,12 +202,25 @@
             expandedContent.innerHTML = '';  // Clear previous content
 
             movie.locations.forEach(location => {
+                const locationIcon = document.createElement('img');
+                locationIcon.src = location.icon;
+                locationIcon.style.height = '1em';
+                locationIcon.style.verticalAlign = 'middle';
+
                 const locationItem = document.createElement('a');
                 locationItem.href = location.url;
                 locationItem.textContent = `Watch on ${location.display_name}`;
                 locationItem.target = '_blank';
 
-                expandedContent.appendChild(locationItem);
+                const container = document.createElement('span');
+                container.style.display = 'flex';
+                container.style.alignItems = 'center';
+                container.style.justifyContent = 'flex-start';
+
+                container.appendChild(locationIcon);
+                container.appendChild(locationItem);
+
+                expandedContent.appendChild(container);
             });
 
             expandedCardBackground.style.display = 'flex'; // Show the expanded card
