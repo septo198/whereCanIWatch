@@ -1,5 +1,7 @@
 $quantity: 24
 
+// Fonts 
+
 @font-face 
   font-family: 'MaximumImpact'
   src: url('fonts/MaximumImpact.ttf') format('truetype')
@@ -12,6 +14,8 @@ $quantity: 24
   font-weight: normal
   font-style: normal
 
+// General style
+
 html, body
   margin: 0
   padding: 0
@@ -21,23 +25,45 @@ html, body
 h1
   font-size: 80px
   font-family: "Rubik", sans-serif
-  #letter-spacing: 2px
   color: white
   text-rendering: geometricPrecision
             
-        
-
 body
   background: url('../images/wallpaper1.jpg')
+  background-position: center
   background-size: cover
   overflow-y: auto
-  background-attachment: fixed 
+  background-attachment: fixed
+  background-repeat: no-repeat 
 
 .content 
   position: relative
   z-index: 1
   text-align: center
   padding-top: 5%
+
+.search-container
+  display: flex
+  align-items: center
+  justify-content: space-between
+  //margin: 20px 0
+
+.search-bar
+  flex: 1
+  //margin-right: 10px
+  padding: 10px
+  font-size: 16px
+
+.search-dropdown
+  //margin-right: 10px
+  //padding: 10px
+  font-size: 16px
+
+.src-button
+  //padding: 10px 20px
+  font-size: 16px
+
+// Cards
 
 .card 
   position: relative
@@ -61,15 +87,19 @@ body
   gap: 20px
   padding: 20px
 
-@media screen and (max-width: 1024px) 
-  .card-container 
-    grid-template-columns: repeat(2, 1fr)
-    
+.card-content
+  color: #000
 
-@media screen and (max-width: 768px)
-  .card-container 
-    grid-template-columns: 1fr
-    
+.card:hover 
+  background-color: rgba(0, 0, 0, 0.6)
+
+.card-container 
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  gap: 20px
+  padding: 20px
+
+// Expanded cards 
 
 .expanded-card-background
   position: fixed
@@ -120,17 +150,9 @@ body
 .expanded-card-content a:hover 
   text-decoration: underline
 
-.card-content
-  color: #000
 
-.card:hover 
-  background-color: rgba(0, 0, 0, 0.6)
 
-.card-container 
-  display: grid
-  grid-template-columns: repeat(3, 1fr)
-  gap: 20px
-  padding: 20px
+// Fireflies animation
 
 .firefly
   position: fixed
@@ -162,7 +184,6 @@ body
     box-shadow: 0 0 0vw 0vw yellow
     animation: drift ease alternate infinite, flash ease infinite
   
-// Randomize Fireflies Motion
 @for $i from 1 through $quantity
   
   $steps: random(12) + 16
@@ -196,3 +217,64 @@ body
   5%
     opacity: 1
     box-shadow: 0 0 2vw 0.4vw yellow
+
+
+
+// Media queries
+
+@media screen and (max-width: 1024px) 
+  .card-container 
+    grid-template-columns: repeat(2, 1fr)
+    
+
+@media screen and (max-width: 768px)
+  .card-container 
+    grid-template-columns: 1fr
+
+  .search-container
+    flex-direction: column
+    align-items: stretch
+
+  .search-bar
+    margin: 0 0 10px 0
+
+  .search-dropdown
+    margin: 0 0 10px 0
+    padding: 0px
+
+  .src-button
+    margin: 0
+
+  .dropdown-and-button 
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: stretch
+    margin: 0
+  
+  .search-dropdown, .src-button
+      flex: 1
+      height: 100%
+      margin: 0 5px 0 0
+
+  .expanded-card 
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    //padding: 10px
+
+  .expandedImage
+    max-width: 100%
+    margin: 0 0 10px 0
+    height: auto
+  
+  .expandedContent
+    text-align: center
+    width: 100%
+
+  .expanded-card img 
+    max-width: 100%
+    margin-right: 0px
+
+  .expanded-card-content 
+    margin: 10px
