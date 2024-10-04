@@ -2,14 +2,12 @@ function loadImageWithFallback(imageElement, imageUrl) {
     imageElement.src = imageUrl;
 
     imageElement.onerror = function() {
-        //console.error('Image failed to load, using fallback.');
         imageElement.src = 'images//imagenotfound.jpg'; 
     };
 }
 
 async function getStreamingInfo(filmName, countryCode) {
-    //const response = await fetch('/api/get-streaming-info', {
-    const response = await fetch('http://127.0.0.1:5000/api/get-streaming-info', { //for local use //TODO: add nginx in local env
+    const response = await fetch('/api/get-streaming-info', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -39,10 +37,8 @@ function parseData(data){
                     url: location.url
                 })),
                 image: movie.picture
-                // , other interesting fields
             };
             parsedData.push(movieData);
-            //console.log(movieData);
         });
     };
     return parsedData;   
@@ -50,7 +46,7 @@ function parseData(data){
 
 function displayResults(parsedData) {
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '';  // Clear previous results
+    resultsDiv.innerHTML = '';  
 
     parsedData.forEach(movie => {
         const cardDiv = document.createElement('div');
@@ -58,7 +54,6 @@ function displayResults(parsedData) {
 
         const img = document.createElement('img');
         loadImageWithFallback(img, movie.image);
-        //img.src = movie.image;
         img.alt = movie.name;
 
         const title = document.createElement('div');
@@ -82,9 +77,8 @@ function expandCard(movie) {
     const expandedContent = document.getElementById('expandedContent');
 
     loadImageWithFallback(expandedImage, movie.image);
-    //expandedImage.src = movie.image;
     expandedTitle.textContent = movie.name;
-    expandedContent.innerHTML = '';  // Clear previous content
+    expandedContent.innerHTML = '';  
 
     movie.locations.forEach(location => {
         const locationIcon = document.createElement('img');
@@ -108,7 +102,7 @@ function expandCard(movie) {
         expandedContent.appendChild(container);
     });
 
-    expandedCardBackground.style.display = 'flex'; // Show the expanded card
+    expandedCardBackground.style.display = 'flex'; 
 }
 
 
