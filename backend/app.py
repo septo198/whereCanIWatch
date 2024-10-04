@@ -1,10 +1,16 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import requests
 import json 
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 CORS(app)  
+
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
+
 
 @app.route('/api/get-streaming-info', methods=['POST']) #local
 #@app.route('/get-streaming-info', methods=['POST'])
@@ -23,28 +29,15 @@ def get_streaming_info():
     url = "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup"
     querystring = {"term": "", "country": ""}
     querystring = {"term": film_name, "country": country_code}
-    # print(querystring)
     headers = {
         "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
         "x-rapidapi-key": xrapidapikey
     }
 
     response = requests.get(url, headers=headers, params=querystring)
-    # print(response.text)
 
     parsedData = json.loads(response.text)
     results = parsedData.get('results', [])
-    # print(results)
-    # for result in results:
-        # movie_name = result.get('name')
-        # print(f"Movie: {movie_name}")
-        
-        # locations = result.get('locations', [])
-        # for location in locations:
-            # display_name = location.get('display_name')
-            # url = location.get('url')
-            # print(f" - Available on: {display_name}")
-            # print(f"   URL: {url}")
 
     return results, 200
 
