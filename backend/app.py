@@ -12,8 +12,7 @@ def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route('/api/get-streaming-info', methods=['POST']) #local
-#@app.route('/get-streaming-info', methods=['POST'])
+@app.route('/api/get-streaming-info', methods=['POST'])
 def get_streaming_info():
     film_name = request.json.get('film_name')
     country_code = request.json.get('country_code')
@@ -21,10 +20,11 @@ def get_streaming_info():
         return jsonify({"error": "Film name is required"}), 400
     
     # Load API key from the config.json file
-    with open('.\\backend\config.json', 'r') as file: #local
-    # with open('config.json', 'r') as file:
-        config = json.load(file)
-    xrapidapikey = config['x-rapidapi-key']
+    # with open('.\\backend\config.json', 'r') as file: 
+        # config = json.load(file)
+    # xrapidapikey = config['x-rapidapi-key']
+    xrapidapikey = os.environ.get('X_RAPIDAPI_KEY')
+    print(xrapidapikey)
 
     url = "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup"
     querystring = {"term": "", "country": ""}
@@ -41,8 +41,7 @@ def get_streaming_info():
 
     return results, 200
 
-@app.route('/api/get-streaming-info', methods=['OPTIONS']) #local
-#@app.route('/get-streaming-info', methods=['OPTIONS'])
+@app.route('/api/get-streaming-info', methods=['OPTIONS']) 
 def options():
     response = jsonify()
     response.headers['Access-Control-Allow-Origin'] = '*'
